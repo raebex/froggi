@@ -1,4 +1,8 @@
 froggi
 ======
 
-cast-on app of your knitting dreams
+Cast-on app of your knitting dreams!
+
+Built using backbone.js
+
+
