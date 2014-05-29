@@ -126,6 +126,7 @@ main {
   width: 100%;
   height: auto;
   border-radius: 7px;
+  margin-bottom: 100px;
 }
 
 .main-form {
@@ -274,6 +275,14 @@ select {
   padding-left: 0;
 }
 
+
+/*about page*/
+#about-things {
+  width: 90%;
+  margin: 100px auto 20px;
+  display: none;
+}
+
 .hide {
   display: none;
 }
@@ -317,7 +326,7 @@ select {
 @media (min-width: 476px){
   /* medium */
 
-  .main-form, .commands, #favs-list {
+  .main-form, .commands, #favs-list, #about-things {
     width: 375px;
   }
 }

@@ -19,7 +19,8 @@ FroggiApp.AppView = Backbone.View.extend({
 		'click #menu-icon': 'menu_things', //brings in menu
 		'click .close': 'hide_modal', //close modal
 		'click .back-home': 'go_back_home', //back button to go back to form
-		'click .favorites': 'open_favorites_preview' //goes to favorties page
+		'click .favorites': 'open_favorites_preview', //goes to favorties page
+		'click .about': 'open_about_page'
 	},
 
 	//called automatically when you call an instance of view
@@ -53,6 +54,10 @@ FroggiApp.AppView = Backbone.View.extend({
 		this.$overlay = $('#overlay');
 		this.$modal_save = $('.modal-save');
 		this.$modal_units = $('.modal-units');
+
+		//about information
+		this.$about_click = $('.about');
+		this.$about_things = $('#about-things');
 
 		//make this application view listen for favs coming from collection
 		//added to our collection
@@ -273,11 +278,15 @@ FroggiApp.AppView = Backbone.View.extend({
 	open_favorites_preview: function(){
 		//make sure the menu is closed
 		this.$menu.removeClass('active');
+		$('.open').slideUp();
 
 		//fade out form and show list of favs
 	    this.$banner.slideUp();
 	    this.$form.slideUp('normal', function(){
 	    	FroggiAppView.$favs_list.slideDown();
+
+	    	//add class 'open'
+	    	FroggiAppView.$favs_list.addClass('open');
 
 	    	//create "back button"
 	    	FroggiAppView.$logo_pic.attr({
@@ -286,6 +295,31 @@ FroggiApp.AppView = Backbone.View.extend({
 	    	});
 	    	//change header text to favorites
 	    	FroggiAppView.$logo.text('Favorites');
+
+	    });
+	},
+
+	//open the about "page"
+	open_about_page: function(){
+		//make sure the menu is closed
+		this.$menu.removeClass('active');
+		$('.open').slideUp();
+
+		//fade out form and show list of favs
+	    this.$banner.slideUp();
+	    this.$form.slideUp('normal', function(){
+	    	FroggiAppView.$about_things.slideDown();
+
+	    	//add class 'open'
+	    	FroggiAppView.$about_things.addClass('open');
+
+	    	//create "back button"
+	    	FroggiAppView.$logo_pic.attr({
+	    		'src': 'images/back.png',
+	    		'class': 'back-home'
+	    	});
+	    	//change header text to favorites
+	    	FroggiAppView.$logo.text('About');
 
 	    });
 	},
@@ -318,8 +352,9 @@ FroggiApp.AppView = Backbone.View.extend({
 	go_back_home: function(e){
 		e.preventDefault();
 
-		//slide up the fav list
-		FroggiAppView.$favs_list.slideUp('normal', function(){
+		//slide up the elements with 'open class'
+		$('.open').slideUp('normal', function(){
+			$(this).removeClass('open');
 			//slide down banner and form
 			FroggiAppView.$banner.slideDown();
 			FroggiAppView.$form.fadeIn();
